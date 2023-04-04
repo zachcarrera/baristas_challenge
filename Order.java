@@ -27,13 +27,45 @@ public class Order {
     
     	// Most of your code will go here, 
     	// so implement the getters and setters first!
+
+    public void addItem(Item newItem) {
+        items.add(newItem);
+    }
     
+    public String getStatusMessage() {
+        return ready ? "Your order is ready." : "Thank you for waiting. Your order will be ready soon.";
+    }
+
+    public double getOrderTotal() {
+        double total = 0;
+        for(Item item : this.items) {
+            total += item.getPrice();
+        }
+        return total;
+    }
+
+    public void display() {
+        System.out.println("----- Order Details -----");
+        System.out.printf("Customer Name: %s\n", this.name);
+        for(Item item : items) {
+            System.out.println(item.getName() + " - " + item.getPrice());
+        }
+        System.out.printf("Total: $%.2f\n", getOrderTotal());
+    }
+
     // GETTERS & SETTERS
     public String getName() {
         return this.name;
     }
     public void setName(String name) {
         this.name = name;
+    }
+
+    public boolean isReady() {
+        return this.ready;
+    }
+    public void setReady(boolean ready) {
+        this.ready = ready;
     }
     
     public ArrayList<Item> getItems() {
